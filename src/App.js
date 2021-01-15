@@ -1,20 +1,27 @@
 // import logo from './logo.svg';
 import './App.css';
 import Coin from './components/Coin/Coin';
+import AccountBalance from './components/AccountBalance/AccountBalance';
 import './components/Coin/Coin.css'
+import './components/AccountBalance/AccountBalance.css'
 //  <img src={logo} className="App-logo" alt="logo" />
+
 
 function App() {
   return (
     <div className="App">
-      <p>base</p>
+      
       <header className="App-header2">
-     
+      
         <p>
           Coin Exchange
         </p>
       </header>
+
       
+      <AccountBalance amount = {10000} /> 
+     
+     
      <table className = "blueTable"> 
         <thead > 
           <tr  >

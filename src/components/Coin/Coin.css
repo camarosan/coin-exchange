@@ -5,6 +5,7 @@ table.blueTable {
   width: 30%;
   height: 200px;
   text-align: left;
+  margin:auto;
 }
 table.blueTable td, table.blueTable th {
   border: 7px solid #AAAAAA;
