@@ -1,16 +1,15 @@
-// import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import Coin from './components/Coin/Coin';
 import AccountBalance from './components/AccountBalance/AccountBalance';
-import './components/Coin/Coin.css'
-import './components/AccountBalance/AccountBalance.css'
-//  <img src={logo} className="App-logo" alt="logo" />
+
+  
 
 
 function App() {
   return (
     <div className="App">
-      
+      <img src={logo} className="App-logo" alt="logo" />
       <header className="App-header2">
       
         <p>
@@ -21,8 +20,9 @@ function App() {
       
       <AccountBalance amount = {10000} /> 
      
+      
      
-     <table className = "blueTable"> 
+       <table>
         <thead > 
           <tr  >
             <th >Name </th>
@@ -31,7 +31,9 @@ function App() {
             <th>Price online</th>
             <th>Update Button</th>
           </tr>
-        </thead>
+          
+          </thead>
+          
         
         <tbody >
         
@@ -39,10 +41,11 @@ function App() {
           <Coin name = "Litecoin " ticker = "LTC" price = {152} />
           <Coin name = "Ethereum " ticker = "ETH" price = {1003} />
           <Coin name  = "EOS"></Coin>
+          
         </tbody>
-      </table>
+        </table>
       
-
+      
           
       
        

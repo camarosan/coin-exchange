@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import './Coin.css';
 import PropTypes from 'prop-types'; // for use with Component.propTypes 
 
+
 export default class Coin extends Component {
+    
     constructor(props){
         super(props);
         this.state = {
@@ -10,6 +12,7 @@ export default class Coin extends Component {
         } 
         this.handleClick = this.handleClick.bind(this); // mandatory event bindings
     }
+    
     /*componentDidMount() {
         const callback = () => {
             const randomPercentage = 0.995 + Math.random() *0.01;
@@ -37,17 +40,20 @@ export default class Coin extends Component {
         
     render() {
         return (
-            <tr className = "Coin-row">
+            
+            <tr >
                 <td>{this.props.name}</td>
                 <td>{this.props.ticker}</td>
                 <td>${this.props.price}</td>
                 <td>${this.state.priceOnline}</td>
+           
                 <td>
                     <form action = "#" method = "POST"> // action and method are mandatory 
                     <button onClick={this.handleClick}> Refresh </button>
                     </form>
                 </td>
               </tr>
+              
         );
     }
 }
