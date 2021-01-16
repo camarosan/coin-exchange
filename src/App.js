@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Coin from './components/Coin/Coin';
+import Tr from './components/Coin/Coin';
 import AccountBalance from './components/AccountBalance/AccountBalance';
 
   
@@ -21,7 +22,7 @@ function App() {
       <AccountBalance amount = {10000} /> 
      
       
-     
+      
        <table>
         <thead > 
           <tr  >
@@ -44,6 +45,7 @@ function App() {
           
         </tbody>
         </table>
+      
       
       
           

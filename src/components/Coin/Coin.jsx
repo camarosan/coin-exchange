@@ -1,8 +1,27 @@
 import React, { Component } from 'react'
-import './Coin.css';
+// import './Coin.css';
 import PropTypes from 'prop-types'; // for use with Component.propTypes 
 
+import styled from 'styled-components'
 
+const Tr = styled.tr `
+    width: 100%;
+    font-family: "Times New Roman", Times, serif;
+    border: 10px solid #1C6EA4;
+    background-color: #2a6296c0;
+    height: 50px;
+    text-align: center;
+    margin:auto;
+    
+`; 
+const Td = styled.td`
+    border: 1px solid black;
+`
+
+
+const Th = styled.th`
+    border: 1px solid black;
+`
 export default class Coin extends Component {
     
     constructor(props){
@@ -39,22 +58,24 @@ export default class Coin extends Component {
     }
         
     render() {
+        
+          
         return (
             
-            <tr className = "simple">
-                <td>{this.props.name}</td>
-                <td>{this.props.ticker}</td>
-                <td>${this.props.price}</td>
-                <td>${this.state.priceOnline}</td>
-           
-                <td>
+            <Tr>
+                <Td>{this.props.name}</Td>
+                <Td>{this.props.ticker}</Td>
+                <Td>${this.props.price}</Td>
+                <Td>${this.state.priceOnline}</Td>
+                <Td>
                     <form action = "#" method = "POST"> // action and method are mandatory 
                     <button onClick={this.handleClick}> Refresh </button>
                     </form>
-                </td>
-              </tr>
+                </Td>
+            </Tr>
               
         );
+        
     }
 }
 
