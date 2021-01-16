@@ -1,14 +1,15 @@
 
-  table.simple {
+  .simple {
   width: 100%;
+  
   font-family: "Times New Roman", Times, serif;
   border: 10px solid #1C6EA4;
   background-color: #2a6296c0;
-  height: 200px;
-  text-align: left;
+  height: 50px;
+  text-align: center;
   margin:auto;
   }
-  table, th, td, tr {
+   .simple, th, td, tr {
     border: 1px solid black;
   }
   
