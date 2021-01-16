@@ -2,13 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import Coin from './components/Coin/Coin';
 import AccountBalance from './components/AccountBalance/AccountBalance';
+import React, { Component } from 'react'
 
-  
-
-
-function App() {
-  return (
-    <div className="App">
+export default class App extends Component {
+  render() {
+    return (
+      <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         Coin Exchange
@@ -31,7 +30,9 @@ function App() {
           </tbody>
       </table>
     </div>
-  );
+    )
+  }
 }
 
-export default App;
+
+//export default App;
