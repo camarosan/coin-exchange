@@ -28,8 +28,7 @@ function App() {
           <tr  >
             <th >Name </th>
             <th >Ticker</th>
-            <th>Price</th>
-            <th>Price online</th>
+            <th>Price Online</th>
             <th>Update Button</th>
           </tr>
           

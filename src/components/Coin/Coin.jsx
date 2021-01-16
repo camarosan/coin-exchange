@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'; // for use with Component.propTypes
 import styled from 'styled-components'
 
 const Tr = styled.tr `
-    width: 100%;
+    width: 50vh;
     font-family: "Times New Roman", Times, serif;
     border: 10px solid #1C6EA4;
     background-color: #2a6296c0;
@@ -16,6 +16,7 @@ const Tr = styled.tr `
 `; 
 const Td = styled.td`
     border: 1px solid black;
+    width: 50vh;
 `
 
 
@@ -65,10 +66,10 @@ export default class Coin extends Component {
             <Tr>
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
-                <Td>${this.props.price}</Td>
                 <Td>${this.state.priceOnline}</Td>
                 <Td>
-                    <form action = "#" method = "POST"> // action and method are mandatory 
+                    <form action = "#" method = "POST">  
+                    
                     <button onClick={this.handleClick}> Refresh </button>
                     </form>
                 </Td>
