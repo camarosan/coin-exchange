@@ -4,10 +4,10 @@ import styled from 'styled-components'
 
 const Section = styled.section `
 background: transparent;
-border-radius: 3px;
+border-radius: 20px;
 border: 2px solid palevioletred;
-color: palevioletred;
-margin: 0 1em;
+color: black;
+margin: 1 1em;
 padding: 0.25em 1em;
 `
 
@@ -16,14 +16,11 @@ export default class AccountBalance extends Component {
         return (
             <Section>
                 Amount = $ {this.props.amount}
-                
             </Section>
         )
     }
 }
 
 AccountBalance.propTypes = {
-   
-    amount: PropTypes.number,
-   
-  };
+   amount: PropTypes.number,
+};
