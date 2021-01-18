@@ -1,10 +1,37 @@
 import logo from './logo.svg';
 import './App.css';
-import Coin from './components/Coin/Coin';
+import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance';
-import React, { Component } from 'react'
+import React  from 'react';
 
-export default class App extends Component {
+
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+       balance : 10000,
+       coinData :[
+         {
+           name: 'Bitcoin',
+           ticker: 'BTC',
+           price: 9999.99
+         },
+         {
+          name: 'Litecoin',
+          ticker: 'LTC',
+          price: 152
+         },
+         {
+          name: 'Ethereum ',
+          ticker: 'ETH',
+          price: 1003
+         },
+       ]
+    }
+  }
+  
   render() {
     return (
       <div className="App">
@@ -12,27 +39,12 @@ export default class App extends Component {
         <img src={logo} className="App-logo" alt="logo" />
         Coin Exchange
       </header>
-      <AccountBalance amount = {10000} /> 
-      <table>
-        <thead> 
-          <tr>
-            <th>Name</th>
-            <th>Ticker</th>
-            <th>Price Online</th>
-            <th>Update Button</th>
-          </tr>
-        </thead>
-          <tbody >
-            <Coin name = "Bitcoin"  ticker = "BTC" price = {31412.99}/>
-            <Coin name = "Litecoin" ticker = "LTC" price = {152} />
-            <Coin name = "Ethereum" ticker = "ETH" price = {1003} />
-            <Coin name = "EOS"/>
-          </tbody>
-      </table>
+      <AccountBalance amount = {this.state.balance} /> 
+      <CoinList coinData ={this.state.coinData} /> 
     </div>
     )
   }
 }
 
 
-//export default App;
+export default App;
