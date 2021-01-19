@@ -1,11 +1,7 @@
-
-
 import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance';
 import React  from 'react';
 import Header from './components/Header/Header';
-
-
 
 class App extends React.Component {
   constructor(props) {

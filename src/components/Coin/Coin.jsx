@@ -15,7 +15,7 @@ const Tr = styled.tr `
 
 const Td = styled.td`
     border: 1px solid black;
-    width: 50vh;
+    width: 60vh;
 `
 
 export default class Coin extends Component {

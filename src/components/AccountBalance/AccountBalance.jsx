@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components'
 
 const Section = styled.section `
+text-align: center;
 background: transparent;
 border-radius: 20px;
 border: 2px solid palevioletred;
