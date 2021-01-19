@@ -1,7 +1,7 @@
 import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance';
 import React  from 'react';
-import Header from './components/Header/Header';
+import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 
 class App extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class App extends React.Component {
   render() {
     return (
     <>
-      <Header header/>
+      <ExchangeHeader/>
       <AccountBalance amount = {this.state.balance} /> 
       <CoinList coinData ={this.state.coinData} /> 
     </>
