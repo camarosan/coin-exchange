@@ -56,6 +56,7 @@ export default class Coin extends Component {
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.state.price}</Td>
+                <Td>{this.props.type}</Td>
                 <Td>
                     <form action = "#" method = "POST">  
                         <button onClick={this.handleClick}>Refresh</button>
@@ -70,6 +71,7 @@ Component.propTypes = {
     name: PropTypes.string,
     ticker: PropTypes.string,
     price: PropTypes.number,
+    type: PropTypes.string, 
 };
 
   

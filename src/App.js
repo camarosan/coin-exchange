@@ -9,21 +9,26 @@ class App extends React.Component {
   
     this.state = {
        balance : 10000,
+       balance2: 200000,
+       prueba : 5000,
        coinData :[
          {
            name: 'Bitcoin',
            ticker: 'BTC',
-           price: 9999.99
+           price: 9999.99,
+           type: 'Bitcoin'
          },
          {
           name: 'Litecoin',
           ticker: 'LTC',
-          price: 152
+          price: 152,
+          type: 'Altcoin'
          },
          {
           name: 'Ethereum ',
           ticker: 'ETH',
-          price: 1003
+          price: 1003,
+          type: 'Altcoin'
          },
        ]
     }
@@ -35,6 +40,7 @@ class App extends React.Component {
       <ExchangeHeader/>
       <AccountBalance amount = {this.state.balance} /> 
       <CoinList coinData ={this.state.coinData} /> 
+      
     </>
     )
   }
