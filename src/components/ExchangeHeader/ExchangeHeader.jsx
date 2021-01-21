@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+//import logo from './logo.svg'; <Logo src={logo} alt="logo" />
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
@@ -25,7 +25,7 @@ export default class ExchangeHeader extends Component {
             <Container>
                 
                 <H>
-                    <Logo src={logo} alt="logo" />
+                    
                     Coin Exchange
                 </H> 
             </Container>

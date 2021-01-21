@@ -9,29 +9,29 @@ class App extends React.Component {
   
     this.state = {
        balance : 10000,
-       balance2: 200000,
-       prueba : 5000,
        coinData :[
          {
            name: 'Bitcoin',
            ticker: 'BTC',
-           price: 9999.99,
-           type: 'Bitcoin'
+           price: 9999.99, 
          },
          {
           name: 'Litecoin',
           ticker: 'LTC',
           price: 152,
-          type: 'Altcoin'
          },
          {
           name: 'Ethereum ',
           ticker: 'ETH',
           price: 1003,
-          type: 'Altcoin'
          },
        ]
     }
+    this.handleRefresh = this.handleRefresh.bind(this); 
+  }
+  handleRefresh(valueChangeTicker) { // to find the data 
+    const coin = this.state.coinData.find(({ticker}) => ticker === valueChangeTicker); 
+    console.log(coin); 
   }
   
   render() {
@@ -39,12 +39,11 @@ class App extends React.Component {
     <>
       <ExchangeHeader/>
       <AccountBalance amount = {this.state.balance} /> 
-      <CoinList coinData ={this.state.coinData} /> 
-      
+      <CoinList coinData ={this.state.coinData} handleRefresh = {this.handleRefresh} /> 
+    
     </>
     )
   }
 }
-
 
 export default App;

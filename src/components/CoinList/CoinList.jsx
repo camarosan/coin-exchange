@@ -11,18 +11,22 @@ export default class CoinList extends Component {
             <th>Name</th>
             <th>Ticker</th>
             <th>Price Online</th>
-            <th>Type</th>
             <th>Update Button</th>
           </tr>
         </thead>
           <tbody >
-            {
-              this.props.coinData.map(value => <Coin key = {value.ticker} 
-              name = {value.name} ticker = {value.ticker} price = {value.price} type = {value.type} />) // key = {ticker} is mandatory to avoid an error 
+            { /*
+              this.state.coinData.map(value => <Coin key = {value.ticker} 
+              name = {value.name} 
+              ticker = {value.ticker} 
+              price = {value.price}  />) // key = {ticker} is mandatory to avoid an error */
               
-              /*this.state.coinData.map(({name, ticker, price}) => <Coin key = {ticker} 
-              name = {name} ticker = {ticker} price = {price} />) // solution 2 
-              */
+              this.props.coinData.map(({name, ticker, price}) => <Coin key = {ticker} 
+              handleRefresh = {this.props.handleRefresh}
+              name = {name} 
+              ticker = {ticker} 
+              price = {price} />) // solution 2 
+              
              /*
               this.props.coinData.map(value => <Coin key = {value.ticker}{...value} />
               ) // solution 3 props is change after passing Coin list to a different component */
