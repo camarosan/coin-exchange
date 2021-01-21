@@ -21,7 +21,9 @@ const Td = styled.td`
 export default class Coin extends Component {
     constructor(props){
         super(props);
-        this.handleclick = this.handleClick.bind(this);
+            this.handleClick = this.handleClick.bind(this);
+            this.example = 10000
+        
     }
     
     /*componentDidMount() {
@@ -35,7 +37,7 @@ export default class Coin extends Component {
         }
         setInterval(callback, 1000);
     }*/
-º
+
     handleClick(event) {
         // prevent the default action of submitting the form 
         event.preventDefault(); // for check the error when you click on Refresh Button 
@@ -54,9 +56,10 @@ export default class Coin extends Component {
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.props.price}</Td>
+                <Td>${this.example}</Td>
                 <Td>
                     <form action = "#" method = "POST">  
-                        <button onClick={this.props.handleClick }>Refresh</button>
+                        <button onClick={this.handleClick }>Refresh</button>
                     </form>
                 </Td>
             </Tr>
