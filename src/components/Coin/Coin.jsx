@@ -22,7 +22,7 @@ export default class Coin extends Component {
     constructor(props){
         super(props);
             this.handleClick = this.handleClick.bind(this);
-            this.example = 10000
+            
         
     }
     
@@ -56,7 +56,7 @@ export default class Coin extends Component {
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.props.price}</Td>
-                <Td>${this.example}</Td>
+                
                 <Td>
                     <form action = "#" method = "POST">  
                         <button onClick={this.handleClick }>Refresh</button>

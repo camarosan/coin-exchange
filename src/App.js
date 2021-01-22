@@ -8,7 +8,7 @@ class App extends React.Component {
     super(props)
   
     this.state = {
-       balance : 10000,
+       balance : 20000,
        coinData :[
          {
            name: 'Bitcoin',
@@ -29,10 +29,25 @@ class App extends React.Component {
     }
     this.handleRefresh = this.handleRefresh.bind(this); 
   }
+
   handleRefresh(valueChangeTicker) { // to find the data 
-    const coin = this.state.coinData.find(({ticker}) => ticker === valueChangeTicker); 
-    console.log(coin); 
+    const newCoinData = this.state.coinData.map(({name,ticker,price }) => {
+    let newPrice = price; 
+    if (valueChangeTicker=== ticker) {
+      const randomPercentage = 0.995 + Math.random() *0.01;
+      newPrice = newPrice*randomPercentage;
+    }
+    return {
+      name,
+      ticker, 
+      price: newPrice
+    }
+    
+    }); 
+    this.setState({coinData: newCoinData})
+    console.log(newCoinData)
   }
+  
   
   render() {
     return (
