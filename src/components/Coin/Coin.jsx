@@ -41,7 +41,7 @@ export default class Coin extends Component {
     handleClick(event) {
         // prevent the default action of submitting the form 
         event.preventDefault(); // for check the error when you click on Refresh Button 
-        this.props.handleRefresh(this.props.ticker); 
+        this.props.handleRefresh(this.props.ticker, true); 
        /* const randomPercentage = 0.995 + Math.random() *0.01;
             this.setState(function(oldState) {
                 return {
@@ -52,10 +52,12 @@ export default class Coin extends Component {
         
     render() {
         return (
+            
             <Tr>
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.props.price}</Td>
+                <Td>${this.props.balance}</Td>
                 
                 <Td>
                     <form action = "#" method = "POST">  
@@ -63,6 +65,7 @@ export default class Coin extends Component {
                     </form>
                 </Td>
             </Tr>
+            
         );
     }
 }
@@ -71,7 +74,8 @@ Component.propTypes = {
     name: PropTypes.string,
     ticker: PropTypes.string,
     price: PropTypes.number,
-    type: PropTypes.string, 
+    balance: PropTypes.number,
+   
 };
 
   
