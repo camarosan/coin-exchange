@@ -22,50 +22,26 @@ export default class Coin extends Component {
     constructor(props){
         super(props);
             this.handleClick = this.handleClick.bind(this);
-            
-        
     }
     
-    /*componentDidMount() {
-        const callback = () => {
-            const randomPercentage = 0.995 + Math.random() *0.01;
-            this.setState(function(oldState) {
-                return {
-                    priceOnline: oldState.priceOnline * randomPercentage
-                }
-            });
-        }
-        setInterval(callback, 1000);
-    }*/
-
     handleClick(event) {
-        // prevent the default action of submitting the form 
-        event.preventDefault(); // for check the error when you click on Refresh Button 
-        this.props.handleRefresh(this.props.ticker, true); 
-       /* const randomPercentage = 0.995 + Math.random() *0.01;
-            this.setState(function(oldState) {
-                return {
-                    price: oldState.price * randomPercentage
-                }
-            });*/ 
+        event.preventDefault();  
+        this.props.handleRefresh(this.props.ticker);
     }
         
     render() {
-        return (
-            
+        return ( 
             <Tr>
                 <Td>{this.props.name}</Td>
                 <Td>{this.props.ticker}</Td>
                 <Td>${this.props.price}</Td>
-                <Td>${this.props.balance}</Td>
+                {this.props.showBalance ? <Td>${this.props.balance}</Td> : null }
                 
                 <Td>
-                    <form action = "#" method = "POST">  
+                    <form action = "#" method = "POST"/>  
                         <button onClick={this.handleClick }>Refresh</button>
-                    </form>
                 </Td>
-            </Tr>
-            
+            </Tr>    
         );
     }
 }
@@ -74,8 +50,7 @@ Component.propTypes = {
     name: PropTypes.string,
     ticker: PropTypes.string,
     price: PropTypes.number,
-    balance: PropTypes.number,
-   
+    balance: PropTypes.number,  
 };
 
   

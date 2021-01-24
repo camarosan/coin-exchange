@@ -23,7 +23,6 @@ export default class ExchangeHeader extends Component {
     render() {
         return (
             <Container>
-                
                 <H>
                 <Logo src={logo} alt="logo" />
                     Coin Exchange
