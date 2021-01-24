@@ -6,11 +6,11 @@ import styled from 'styled-components';
 const Section = styled.section `
 text-align: center;
 background: transparent;
-border-radius: 20px;
+border-radius: 50px;
 border: 2px solid palevioletred;
-color: black;
-margin: 1 1em;
-padding: 0.25em 1em;
+color: white;
+margin: 2 1em;
+padding: 0.10em 3em;
 `
 
 export default class AccountBalance extends Component {
@@ -20,7 +20,7 @@ export default class AccountBalance extends Component {
         return (
             <Section>   
                 <p>{amountText}</p> 
-                <button onClick = {this.props.handleRefreshBalance} >{buttonText}</button>
+                <button onClick = {this.props.handleBalanceVisibilityChange} >{buttonText}</button>
            </Section>
             
         )

@@ -2,12 +2,22 @@ import CoinList from './components/CoinList/CoinList';
 import AccountBalance from './components/AccountBalance/AccountBalance';
 import React  from 'react';
 import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
+import styled from 'styled-components'
+
+
+const ContainerAll = styled.div`
+    background-color: #282c34;
+    height: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(20px + 2vmin);
+    color: white;
+    `
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
+  state = { // put here for class properties 
        balance : 20000, 
        showBalance : true,
        
@@ -50,54 +60,44 @@ class App extends React.Component {
          },
        ]
     }
-    this.handleRefresh = this.handleRefresh.bind(this); 
-    this.handleRefreshBalance = this.handleRefreshBalance.bind(this); 
+    
 
     
-  }
+  
 
-  handleRefresh(valueChangeTicker) { // to find the data 
+  handleRefresh = (valueChangeTicker) => { // for class property  we do not need to bind arrow function 
     
-    const newCoinData = this.state.coinData.map(({name,ticker,price, balance }) => {
-    let newPrice = price;
+    const newCoinData = this.state.coinData.map((values) => { // changed to a function with shallow copy 
+    let newValues = {...values}; // shallow copy cloning objects in javascript
     
-    if (valueChangeTicker=== ticker) {
+    if (valueChangeTicker=== values.ticker) {
       const randomPercentage = 0.995 + Math.random() *0.01;
-      newPrice = newPrice*randomPercentage;
+      newValues.price = randomPercentage;
     }
     
-    return {
-      name,
-      ticker, 
-      price: newPrice,
-      balance  
-    }
-    
+    return newValues
     }); 
     this.setState({coinData: newCoinData})
   }
 
-  handleRefreshBalance(){
-    this.setState(function({name,ticker, price, balance, showBalance}){
+  handleBalanceVisibilityChange = () =>{ // for class property  we do not need to bind  arrow function
+    this.setState(function(oldState){ // another way to write 
       return {
-        name,
-        ticker,
-        price, 
-        balance,
-        showBalance: !showBalance
+        ...oldState, // avoiding copy any of the objects 
+        showBalance: !oldState.showBalance
       }
     })
   }
 
 render() {
     return (
-    <>
+    <ContainerAll>
       <ExchangeHeader/>
       <AccountBalance amount = {this.state.balance} showBalance  = {this.state.showBalance}
-      handleRefreshBalance = {this.handleRefreshBalance}/> 
+      handleBalanceVisibilityChange = {this.handleBalanceVisibilityChange}/> 
       <CoinList coinData ={this.state.coinData} handleRefresh = {this.handleRefresh}
       showBalance = {this.state.showBalance}/> 
-    </>
+    </ContainerAll>
     )
   }
 }
