@@ -71,8 +71,8 @@ class App extends React.Component {
     let newValues = {...values}; // shallow copy cloning objects in javascript
     
     if (valueChangeTicker=== values.ticker) {
-      const randomPercentage = 0.995 + Math.random() *0.01;
-      newValues.price = randomPercentage;
+      const randomPercentage =  0.995 + Math.random() *0.01;
+      newValues.price =  values.price * randomPercentage; // correction before there is not values.price
     }
     
     return newValues
@@ -87,6 +87,13 @@ class App extends React.Component {
         showBalance: !oldState.showBalance
       }
     })
+  }
+  componentDidMount = () => { //for lifecicles methods
+    console.log('MOUNT')
+  }
+
+  componentDidUpdate= () => { //for lifecicles methos
+    console.log('UPDATE')
   }
 
 render() {
