@@ -3,8 +3,9 @@ import AccountBalance from './components/AccountBalance/AccountBalance';
 import React  from 'react';
 import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 import styled from 'styled-components'
+import axios from 'axios'; 
 
-
+const COINCOUNT = 12; 
 const ContainerAll = styled.div`
     background-color: #282c34;
     height: 10;
@@ -21,8 +22,8 @@ class App extends React.Component {
        balance : 20000, 
        showBalance : true,
        
-       coinData :[
-         {
+       coinData :[ 
+         /*{
            name: 'Bitcoin',
            ticker: 'BTC',
            price: 9999.99, 
@@ -57,8 +58,8 @@ class App extends React.Component {
           ticker: 'LTC',
           price: 139,
           balance : 50,
-         },
-       ]
+         },*/
+       ] 
     }
     
 
@@ -89,7 +90,24 @@ class App extends React.Component {
     })
   }
   componentDidMount = () => { //for lifecicles methods
-    console.log('MOUNT')
+    axios.get('https://api.coinpaprika.com/v1/coins') // with axios no need to use json 
+    .then(response => {
+      //debugger;
+      let coinData = response.data.slice(0, COINCOUNT).map(function(coin){
+        return {
+         key: coin.id, // always return a key for render 
+         name: coin.name,
+         ticker:coin.symbol,
+         balance: 0, // if we no put 0 we have an error 
+         price: 0,
+       }; 
+    });
+    console.log('setting the state');
+    this.setState({coinData});
+    console.log('DONE setting the state'); 
+    });
+  console.log('componentDidMount is DONE'); 
+  //debugger;
   }
 
   componentDidUpdate= () => { //for lifecicles methos
