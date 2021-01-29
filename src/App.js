@@ -5,7 +5,7 @@ import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 import styled from 'styled-components'
 import axios from 'axios'; 
 
-const COINCOUNT = 12; 
+const COINCOUNT = 10; 
 const ContainerAll = styled.div`
     background-color: #282c34;
     height: 10;
@@ -90,19 +90,22 @@ class App extends React.Component {
     })
   }
   componentDidMount = async () => { //for lifecicles methods and use await and async function 
-    let response = await axios.get('https://api.coinpaprika.com/v1/coins') // with axios no need to use json 
-    let coinData = response.data.slice(0, COINCOUNT).map(function(coin){
+    const response = await axios.get('https://api.coinpaprika.com/v1/coins') // with axios no need to use json 
+    const coinIds = response.data.slice(0, COINCOUNT).map(coin=> coin.id);
+    const tickerUrl = 'https://api.coinpaprika.com/v1/tickers/';
+    const promises = coinIds.map(id =>axios.get(tickerUrl + id)); 
+    const coinData =  await Promise.all(promises);
+    const coinPriceData = coinData.map((response) =>{
+        const coin = response.data; 
         return {
          key: coin.id, // always return a key for render 
          name: coin.name,
          ticker:coin.symbol,
-         balance: 0, // if we no put 0 we have an error 
-         price: 0,
-       };
-      });
-    this.setState({coinData});
-    
-  
+         balance: 0, 
+         price: parseFloat(Number(coin.quotes.USD.price).toFixed(4)),
+      };
+    });
+    this.setState({coinData: coinPriceData});
   }
 
   componentDidUpdate= () => { //for lifecicles methos
