@@ -66,19 +66,10 @@ class App extends React.Component {
     
   
 
-  handleRefresh = (valueChangeTicker) => { // for class property  we do not need to bind arrow function 
-    
-    const newCoinData = this.state.coinData.map((values) => { // changed to a function with shallow copy 
-    let newValues = {...values}; // shallow copy cloning objects in javascript
-    
-    if (valueChangeTicker=== values.ticker) {
-      const randomPercentage =  0.995 + Math.random() *0.01;
-      newValues.price =  values.price * randomPercentage; // correction before there is not values.price
-    }
-    
-    return newValues
-    }); 
-    this.setState({coinData: newCoinData})
+  handleRefresh = async (keyid) => {  
+    const promise = await axios.get('https://api.coinpaprika.com/v1/tickers/'+ keyid);
+    console.log(promise.["data"].["quotes"].["USD"].["price"]);
+ 
   }
 
   handleBalanceVisibilityChange = () =>{ // for class property  we do not need to bind  arrow function
@@ -99,13 +90,16 @@ class App extends React.Component {
         const coin = response.data; 
         return {
          key: coin.id, // always return a key for render 
+         id: coin.id,
          name: coin.name,
          ticker:coin.symbol,
          balance: 0, 
          price: parseFloat(Number(coin.quotes.USD.price).toFixed(4)),
       };
     });
+
     this.setState({coinData: coinPriceData});
+    console.log(coinData);
   }
 
   componentDidUpdate= () => { //for lifecicles methos
