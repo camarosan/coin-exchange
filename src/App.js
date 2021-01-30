@@ -5,6 +5,7 @@ import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 import styled from 'styled-components'
 import axios from 'axios'; 
 
+
 const COINCOUNT = 10; 
 const ContainerAll = styled.div`
     background-color: #282c34;
@@ -16,6 +17,7 @@ const ContainerAll = styled.div`
     font-size: calc(20px + 2vmin);
     color: white;
     `
+
 
 class App extends React.Component {
   state = { // put here for class properties 
@@ -63,14 +65,19 @@ class App extends React.Component {
     }
     
 
-    
-  
-
   handleRefresh = async (keyid) => {  
     const promise = await axios.get('https://api.coinpaprika.com/v1/tickers/'+ keyid);
-    console.log(promise.["data"].["quotes"].["USD"].["price"]);
- 
+    const newCoinData = this.state.coinData.map((values) => { // changed to a function with shallow copy 
+    let newValues = {...values}; // shallow copy cloning objects in javascript 
+      if (keyid=== values.key) {
+        const updatePrice = parseFloat(Number(promise.data.quotes.USD.price).toFixed(4));
+        newValues.price =  updatePrice;   
+      }
+      return newValues
+    }); 
+      this.setState({coinData: newCoinData})
   }
+      
 
   handleBalanceVisibilityChange = () =>{ // for class property  we do not need to bind  arrow function
     this.setState(function(oldState){ // another way to write 
@@ -80,6 +87,8 @@ class App extends React.Component {
       }
     })
   }
+
+
   componentDidMount = async () => { //for lifecicles methods and use await and async function 
     const response = await axios.get('https://api.coinpaprika.com/v1/coins') // with axios no need to use json 
     const coinIds = response.data.slice(0, COINCOUNT).map(coin=> coin.id);
@@ -96,15 +105,15 @@ class App extends React.Component {
          balance: 0, 
          price: parseFloat(Number(coin.quotes.USD.price).toFixed(4)),
       };
-    });
-
+    }); 
     this.setState({coinData: coinPriceData});
-    console.log(coinData);
   }
 
-  componentDidUpdate= () => { //for lifecicles methos
+
+  componentDidUpdate= () => { //for lifecicles methods
     console.log('UPDATE')
   }
+
 
 render() {
     return (

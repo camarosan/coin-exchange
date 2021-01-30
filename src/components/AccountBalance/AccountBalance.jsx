@@ -27,6 +27,7 @@ export default class AccountBalance extends Component {
     }
 }
 
+
 AccountBalance.propTypes = {
    amount: PropTypes.number,
    showBalance: PropTypes.bool,
