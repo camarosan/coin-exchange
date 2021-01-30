@@ -5,7 +5,7 @@ import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 import styled from 'styled-components'
 import axios from 'axios'; 
 
-
+const formatPrice = price => parseFloat(Number(price).toFixed(4));
 const COINCOUNT = 10; 
 const ContainerAll = styled.div`
     background-color: #282c34;
@@ -20,77 +20,40 @@ const ContainerAll = styled.div`
 
 
 class App extends React.Component {
-  state = { // put here for class properties 
+  state = { 
        balance : 20000, 
        showBalance : true,
-       
-       coinData :[ 
-         /*{
-           name: 'Bitcoin',
-           ticker: 'BTC',
-           price: 9999.99, 
-           balance: 10,
-         },
-         {
-          name: 'Ethereum',
-          ticker: 'ETH',
-          price: 299,
-          balance: 40,
-         },
-         {
-          name: 'Tether',
-          ticker: 'USDT',
-          price: 1,
-          balance: 10,
-         },
-         {
-          name: 'Ripple',
-          ticker: 'XRP',
-          price: 0.2,
-          balance : 90
-         },
-         {
-          name: 'Bitcoin Cash',
-          ticker: 'BCH',
-          price: 298.99,
-          balance : 1,
-         },
-         {
-          name: 'Litecoin',
-          ticker: 'LTC',
-          price: 139,
-          balance : 50,
-         },*/
-       ] 
+       coinData :[ ] 
     }
     
 
-  handleRefresh = async (keyid) => {  
-    const promise = await axios.get('https://api.coinpaprika.com/v1/tickers/'+ keyid);
-    const newCoinData = this.state.coinData.map((values) => { // changed to a function with shallow copy 
-    let newValues = {...values}; // shallow copy cloning objects in javascript 
-      if (keyid=== values.key) {
-        const updatePrice = parseFloat(Number(promise.data.quotes.USD.price).toFixed(4));
-        newValues.price =  updatePrice;   
+  handleRefresh = async (valueChangeId) => {  // receive the id with valueChangeId changed
+    const tickerUrl =  `https://api.coinpaprika.com/v1/tickers/${valueChangeId}`
+    const response = await axios.get(tickerUrl);
+    const newPrice = formatPrice(response.data.quotes.USD.price);
+    const newCoinData = this.state.coinData.map((values) => { 
+    let newValues = {...values}; 
+      if (valueChangeId=== values.key) {
+        newValues.price =  newPrice;  // update price with new price 
       }
-      return newValues
+      return newValues;
     }); 
-      this.setState({coinData: newCoinData})
+      this.setState({coinData: newCoinData}) 
   }
       
 
-  handleBalanceVisibilityChange = () =>{ // for class property  we do not need to bind  arrow function
-    this.setState(function(oldState){ // another way to write 
+  handleBalanceVisibilityChange = () =>{ 
+    this.setState(function(oldState){ 
       return {
-        ...oldState, // avoiding copy any of the objects 
+        ...oldState, 
         showBalance: !oldState.showBalance
       }
     })
   }
 
 
-  componentDidMount = async () => { //for lifecicles methods and use await and async function 
-    const response = await axios.get('https://api.coinpaprika.com/v1/coins') // with axios no need to use json 
+  componentDidMount = async () => { 
+    const response = await axios.get('https://api.coinpaprika.com/v1/coins'); 
     const coinIds = response.data.slice(0, COINCOUNT).map(coin=> coin.id);
     const tickerUrl = 'https://api.coinpaprika.com/v1/tickers/';
     const promises = coinIds.map(id =>axios.get(tickerUrl + id)); 
@@ -98,20 +61,15 @@ class App extends React.Component {
     const coinPriceData = coinData.map((response) =>{
         const coin = response.data; 
         return {
-         key: coin.id, // always return a key for render 
-         id: coin.id,
+         key: coin.id, 
+         id: coin.id,// New i cannot use key
          name: coin.name,
          ticker:coin.symbol,
          balance: 0, 
-         price: parseFloat(Number(coin.quotes.USD.price).toFixed(4)),
-      };
+         price: formatPrice(coin.quotes.USD.price), // changed 
+        }
     }); 
     this.setState({coinData: coinPriceData});
-  }
-
-
-  componentDidUpdate= () => { //for lifecicles methods
-    console.log('UPDATE')
   }
 
 

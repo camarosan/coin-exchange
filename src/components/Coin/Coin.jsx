@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'; // for use with Component.propTypes 
+import PropTypes from 'prop-types';  
 
 import styled from 'styled-components'
-// we simplify the style with ony Td
 const Td = styled.td` 
     border: 1px solid black;
     width: 60vh;
 `
 
 export default class Coin extends Component {
-    handleClick = (event) => { // for class properties arrow function 
+    handleClick = (event) => {  
         event.preventDefault(); 
-        this.props.handleRefresh(this.props.id);
+        this.props.handleRefresh(this.props.id); // pass the id 
     }
         
     render() {
