@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types';  
 
 import styled from 'styled-components'
@@ -7,30 +7,30 @@ const Td = styled.td`
     width: 60vh;
 `
 
-export default class Coin extends Component {
-    handleClick = (event) => {  
+
+export default function Coin(props)  {
+    const handleClick = (event) => {  
         event.preventDefault(); 
-        this.props.handleRefresh(this.props.id); // pass the id 
+        props.handleRefresh(props.id); // pass the id 
     }
         
-    render() {
         return ( 
             <tr>
-                <Td>{this.props.name}</Td>
-                <Td>{this.props.ticker}</Td>
-                <Td>${this.props.price}</Td>
-                {this.props.showBalance ? <Td>${this.props.balance}</Td> : null }
+                <Td>{props.name}</Td>
+                <Td>{props.ticker}</Td>
+                <Td>${props.price}</Td>
+                {props.showBalance ? <Td>${props.balance}</Td> : null }
                 
                 <Td>
                     <form action = "#" method = "POST"/>  
-                        <button onClick={this.handleClick }>Refresh</button>
+                        <button onClick={handleClick }>Refresh</button>
                 </Td>
             </tr>    
         );
-    }
+    
 }
 
-Component.propTypes = {
+Coin.propTypes = {
     name: PropTypes.string,
     ticker: PropTypes.string,
     price: PropTypes.number,
