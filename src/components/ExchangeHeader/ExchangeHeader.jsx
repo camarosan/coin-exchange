@@ -1,5 +1,5 @@
 import logo from './logo.svg'; 
-import React, { Component } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -12,15 +12,10 @@ const Logo = styled.img`
     height: 20vmin;
     pointer-events: none;
 `
-export default class ExchangeHeader extends Component {
-    render() {
+export default function ExchangeHeader (props) {
         return (
             <Container>
-                
-                <Logo src={logo} alt="logo"/> Coin Exchange  
-                    
-                
+                <Logo src={logo} alt="logo"/> Coin Exchange           
             </Container>
         )
     }
-}

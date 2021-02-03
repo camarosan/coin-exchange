@@ -22,6 +22,7 @@ function App(props) { // new for hooks and function components
     const [balance, setBalance] = useState(10000);
     const [showBalance, setShowtbalance] = useState(true);
     const [coinData, setCoindata] = useState([]);
+    const [global, setGlobal] = useState([]);
     
 
   const handleRefresh = async (valueChangeId) => {  // receive the id with valueChangeId changed
@@ -43,6 +44,8 @@ function App(props) { // new for hooks and function components
     setShowtbalance(oldValue => !oldValue); // new for hooks 
   }
 
+
+
   const componentDidMount = async () => { 
       const response = await axios.get('https://api.coinpaprika.com/v1/coins'); 
       const coinIds = response.data.slice(0, COINCOUNT).map(coin=> coin.id);
@@ -63,17 +66,33 @@ function App(props) { // new for hooks and function components
       setCoindata(coinPriceData); // new for hooks, component did mount 
   } 
     
-  useEffect( () => { // new for hooks and function Components
+  const componentDidMount2 = async () => { 
+    const urlGeneral = `https://api.coinpaprika.com/v1/global`
+    const promise = await axios.get(urlGeneral);
+    const generalData = promise.data; 
+    setGlobal (generalData);
+  }
+
+  const handleRefresh2 = async () => { 
+    const promise = await axios.get(`https://api.coinpaprika.com/v1/global`);
+    setGlobal (promise.data);
+  }
+
+  useEffect( () => { 
     if(coinData.length === 0) {
       componentDidMount(); 
+      componentDidMount2(); 
+
     }
   });
   
-    return ( // new for hooks and function Components
+  
+    return ( 
     <ContainerAll>
       <ExchangeHeader/>
       <AccountBalance amount = {balance} showBalance  = {showBalance}
-      handleBalanceVisibilityChange = {handleBalanceVisibilityChange}/> 
+      handleBalanceVisibilityChange = {handleBalanceVisibilityChange}
+      handleRefresh2 = {handleRefresh2}  global = {global}/> 
       <CoinList coinData ={coinData} handleRefresh = {handleRefresh}
       showBalance = {showBalance}/> 
     </ContainerAll>
