@@ -48,8 +48,8 @@ export default function AccountBalance(props)  {
                   </thead>
                   <tbody >
                      <tr>
-                        <Td>${props.global.market_cap_usd}</Td>
-                        <Td>${props.global.volume_24h_usd}</Td>
+                        <Td>${Number(props.global.market_cap_usd)}</Td>
+                        <Td>${Number(props.global.volume_24h_usd)}</Td>
                         <Td>{props.global.bitcoin_dominance_percentage}%</Td>
                         <Td>{props.global.cryptocurrencies_number}</Td>
                      </tr>    

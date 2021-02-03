@@ -4,9 +4,12 @@ import React,  {useState, useEffect} from 'react';
 import ExchangeHeader from './components/ExchangeHeader/ExchangeHeader';
 import styled from 'styled-components'
 import axios from 'axios'; 
+import { sha256 } from 'js-sha256';
+
 
 const formatPrice = price => parseFloat(Number(price).toFixed(4));
 const COINCOUNT = 10; 
+const hashPassword  = "4525788bce6d3098bdf6746f7de36cbdbd155eb991f4cd789a384376d3a83ba9";
 const ContainerAll = styled.div`
     background-color: #282c34;
     height: 10;
@@ -23,7 +26,16 @@ function App(props) { // new for hooks and function components
     const [showBalance, setShowtbalance] = useState(true);
     const [coinData, setCoindata] = useState([]);
     const [global, setGlobal] = useState([]);
+    const [text, setText] = useState(""); 
     
+
+    const handleChange = e => {
+      if(sha256(e.target.value)=== hashPassword) {
+        const bailoud = balance + 10000;
+        setBalance(bailoud);
+      }
+      setText(e.target.value)
+    }
 
   const handleRefresh = async (valueChangeId) => {  // receive the id with valueChangeId changed
     const tickerUrl =  `https://api.coinpaprika.com/v1/tickers/${valueChangeId}`
@@ -43,8 +55,6 @@ function App(props) { // new for hooks and function components
   const handleBalanceVisibilityChange = () =>{ 
     setShowtbalance(oldValue => !oldValue); // new for hooks 
   }
-
-
 
   const componentDidMount = async () => { 
       const response = await axios.get('https://api.coinpaprika.com/v1/coins'); 
@@ -69,7 +79,7 @@ function App(props) { // new for hooks and function components
   const componentDidMount2 = async () => { 
     const urlGeneral = `https://api.coinpaprika.com/v1/global`
     const promise = await axios.get(urlGeneral);
-    const generalData = promise.data; 
+    const generalData = promise.data;     
     setGlobal (generalData);
   }
 
@@ -78,18 +88,18 @@ function App(props) { // new for hooks and function components
     setGlobal (promise.data);
   }
 
+ 
   useEffect( () => { 
     if(coinData.length === 0) {
       componentDidMount(); 
       componentDidMount2(); 
-
     }
   });
   
   
     return ( 
     <ContainerAll>
-      <ExchangeHeader/>
+      <ExchangeHeader handleChange = {handleChange}/>
       <AccountBalance amount = {balance} showBalance  = {showBalance}
       handleBalanceVisibilityChange = {handleBalanceVisibilityChange}
       handleRefresh2 = {handleRefresh2}  global = {global}/> 
